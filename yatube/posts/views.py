@@ -42,7 +42,7 @@ def profile(request, username):
     follow = Follow.objects.filter(
         user__username=request.user,
         author=name
-        ).exists()
+    ).exists()
     context = {
         'name': name,
         'post_list': post_list,
