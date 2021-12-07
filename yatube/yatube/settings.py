@@ -136,4 +136,4 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'my_cache_table',
     }
-} 
+}
