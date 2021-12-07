@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from posts.models import Group, Post, User
 
 from .test_views import TEST_GROUP_SLUG

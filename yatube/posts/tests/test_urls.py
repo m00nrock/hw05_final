@@ -1,4 +1,5 @@
 from django.test import Client, TestCase
+
 from posts.models import Group, Post, User
 
 TEST_GROUP_SLUG = 'test-slug'
