@@ -41,7 +41,7 @@
         <img class="card-img my-2" src="{{ im.url }}">
       {% endthumbnail %}
       <p>
-        {{ post.text }}
+        {{ post.text|linebreaks }}
       </p>
       <a href="/posts/{{ post.pk }}">подробная информация </a><br>
   </article>       

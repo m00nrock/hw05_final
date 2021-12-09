@@ -76,7 +76,10 @@ class Comment(models.Model):
     )
 
     class Meta:
-        ordering = ['-created']
+        ordering = ('-created',)
+
+    def __str__(self) -> str:
+        return self.text[:15]
 
 
 class Follow(models.Model):
@@ -90,3 +93,10 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name='following'
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name='unique_author')
+        ]

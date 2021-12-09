@@ -56,12 +56,11 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     username = post.author
     post_list = Post.objects.filter(author=username).all()
-    count = post_list.count()
     comments = post.comments.all()
     form = CommentForm()
     context = {
         'post': post,
-        'count': count,
+        'post_list': post_list,
         'comments': comments,
         'form': form,
     }
@@ -70,8 +69,8 @@ def post_detail(request, post_id):
 
 @login_required
 def post_create(request):
-    form = PostForm(request.POST)
-    if request.method == 'POST' and form.is_valid():
+    form = PostForm(request.POST or None)
+    if form.is_valid():
         post = form.save(commit=False)
         post.author = request.user
         post.save()

@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from django.test import Client, TestCase
 
 from posts.models import Group, Post, User
@@ -9,6 +11,8 @@ CREATE_PAGE = '/create/'
 GROUP_PAGE = f'/group/{TEST_GROUP_SLUG}/'
 PROFILE_PAGE = f'/profile/{TEST_USERNAME}/'
 PAGE_404 = '/blah-blah-blah/'
+OK = HTTPStatus.OK
+NOT_FOUND = HTTPStatus.NOT_FOUND
 
 
 class PostsURLTests(TestCase):
@@ -40,13 +44,13 @@ class PostsURLTests(TestCase):
         """Проверка соответствия шаблонов."""
         client = Client()
         template_url = {
-            INDEX_PAGE: ('posts/index.html', 200),
-            GROUP_PAGE: ('posts/group_list.html', 200),
-            PROFILE_PAGE: ('posts/profile.html', 200),
-            PostsURLTests.POST_PAGE: ('posts/post_detail.html', 200),
-            PostsURLTests.POST_EDIT_PAGE: ('posts/create_post.html', 200),
-            CREATE_PAGE: ('posts/create_post.html', 200),
-            PAGE_404: ('core/404.html', 404),
+            INDEX_PAGE: ('posts/index.html', OK),
+            GROUP_PAGE: ('posts/group_list.html', OK),
+            PROFILE_PAGE: ('posts/profile.html', OK),
+            PostsURLTests.POST_PAGE: ('posts/post_detail.html', OK),
+            PostsURLTests.POST_EDIT_PAGE: ('posts/create_post.html', OK),
+            CREATE_PAGE: ('posts/create_post.html', OK),
+            PAGE_404: ('core/404.html', NOT_FOUND),
         }
 
         for adress, excepted in template_url.items():
