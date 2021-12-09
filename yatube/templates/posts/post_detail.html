@@ -54,7 +54,7 @@
   </a>
   <br>
 {% endif %}
-{% include "posts/comments.html" with comments=comments %}
+{% include "posts/comments.html" with comments=post.comments.all %}
   </article>
 </div>
 {% endblock %}

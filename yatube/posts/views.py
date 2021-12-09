@@ -56,12 +56,10 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     username = post.author
     post_list = Post.objects.filter(author=username).all()
-    comments = post.comments.all()
     form = CommentForm()
     context = {
         'post': post,
         'post_list': post_list,
-        'comments': comments,
         'form': form,
     }
     return render(request, 'posts/post_detail.html', context)
