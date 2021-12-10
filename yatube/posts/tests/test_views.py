@@ -230,7 +230,7 @@ class PostsPagesTests(TestCase):
 
     def test_no_img_new_post(self):
         """После загрузки неподдерживаемого файла, пост не создаётся."""
-        with open('posts/tests/test_files/test_trash.txt', 'rb') as img:
+        with open('test_files/test_trash.txt', 'rb') as img:
             self.authorized_client.post(
                 CREATE_PAGE,
                 {'text': 'test', 'group': PostsPagesTests.group, 'image': img})
