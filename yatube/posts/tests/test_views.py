@@ -230,7 +230,7 @@ class PostsPagesTests(TestCase):
 
     def test_no_img_new_post(self):
         """После загрузки неподдерживаемого файла, пост не создаётся."""
-        with open("yatube/settings.py", 'rb') as img:
+        with open('manage.py', 'rb') as img:
             self.authorized_client.post(
                 CREATE_PAGE,
                 {'text': 'test', 'group': PostsPagesTests.group, 'image': img})
