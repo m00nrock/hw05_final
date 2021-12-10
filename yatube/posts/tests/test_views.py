@@ -230,10 +230,14 @@ class PostsPagesTests(TestCase):
 
     def test_no_img_new_post(self):
         """После загрузки неподдерживаемого файла, пост не создаётся."""
-        with open('manage.py', 'rb') as img:
-            self.authorized_client.post(
-                CREATE_PAGE,
-                {'text': 'test', 'group': PostsPagesTests.group, 'image': img})
+        txt = SimpleUploadedFile(
+            name='text.txt',
+            content=b'test_text',
+            content_type='text/plain'
+        )
+        self.authorized_client.post(
+            CREATE_PAGE,
+            {'text': 'test', 'group': PostsPagesTests.group, 'image': txt})
         response = self.authorized_client.get(INDEX_PAGE)
         self.assertNotContains(response, self.authorized_client.post)
 
