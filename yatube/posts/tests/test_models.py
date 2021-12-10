@@ -1,6 +1,4 @@
 from django.test import TestCase
-from django.test.client import Client
-from django.urls import reverse
 
 from posts.models import Comment, Follow, Group, Post, User
 
