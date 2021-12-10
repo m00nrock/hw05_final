@@ -1,6 +1,7 @@
 from django import forms
 from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.http import response
 from django.test import Client, TestCase
 from django.urls import reverse
 
@@ -227,6 +228,15 @@ class PostsPagesTests(TestCase):
         response = self.authorized_client2.get(FOLLOWS_PAGE)
         posts = response.context.get(PAGINATOR_CONTEXT)
         self.assertEqual(len(posts), 0)
+
+    def test_no_img_new_post(self):
+        """После загрузки неподдерживаемого файла, пост не создаётся."""
+        with open('posts/tests/test_files/test_trash.txt', 'rb') as img:
+            self.authorized_client.post(
+                CREATE_PAGE,
+                {'text': 'test', 'group': PostsPagesTests.group, 'image': img})
+        response = self.authorized_client.get(INDEX_PAGE)
+        self.assertNotContains(response, self.authorized_client.post)
 
 
 class CacheTest(TestCase):
